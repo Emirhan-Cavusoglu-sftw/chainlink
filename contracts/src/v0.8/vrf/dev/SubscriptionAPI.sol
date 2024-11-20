@@ -20,24 +20,53 @@ abstract contract SubscriptionAPI is ConfirmedOwner, IERC677Receiver, IVRFSubscr
   // This bound ensures we are able to loop over them as needed.
   // Should a user require more consumers, they can use multiple subscriptions.
   uint16 public constant MAX_CONSUMERS = 100;
+  // Error Selector: 0x05a48e0f
   error TooManyConsumers();
+
+  // Error Selector: 0xf4d678b8
   error InsufficientBalance();
+
+  // Error Selector: 0x79bfd401
   error InvalidConsumer(uint256 subId, address consumer);
+
+  // Error Selector: 0x1f6a65b6
   error InvalidSubscription();
+
+  // Error Selector: 0x44b0e3c3
   error OnlyCallableFromLink();
+
+  // Error Selector: 0x8129bbcd
   error InvalidCalldata();
+
+  // Error Selector: 0xd8a3fb52
   error MustBeSubOwner(address owner);
+
+  // Error Selector: 0xb42f66e8
   error PendingRequestExists();
+
+  // Error Selector: 0xd084e975
   error MustBeRequestedOwner(address proposedOwner);
+
+  // Error Selector: 0xa99da302
   error BalanceInvariantViolated(uint256 internalBalance, uint256 externalBalance); // Should never happen
-  event FundsRecovered(address to, uint256 amount);
-  event NativeFundsRecovered(address to, uint256 amount);
+  
+  // Error Selector: 0x2d118a6e
   error LinkAlreadySet();
+
+  // Error Selector: 0x950b2479
   error FailedToSendNative();
+
+  // Error Selector: 0x7c07fc4c
   error FailedToTransferLink();
+
+  // Error Selector: 0x1390f2a1
   error IndexOutOfRange();
+
+  // Error Selector: 0xc1f0c0a1
   error LinkNotSet();
 
+  event FundsRecovered(address to, uint256 amount);
+  event NativeFundsRecovered(address to, uint256 amount);
   // We use the subscription struct (1 word)
   // at fulfillment time.
   struct Subscription {
